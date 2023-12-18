@@ -54,13 +54,11 @@ class Board:
             if cells[0].owner == cells[1].owner == cells[2].owner == player_id or \
                     cells[3].owner == cells[4].owner == cells[5].owner == player_id or \
                     cells[6].owner == cells[7].owner == cells[8].owner == player_id:
-                print(f"line 61, winner = {player_id}")
                 return player_id
             # checking columns
             if cells[0].owner == cells[3].owner == cells[6].owner == player_id or \
                     cells[1].owner == cells[4].owner == cells[7].owner == player_id or \
                     cells[2].owner == cells[5].owner == cells[8].owner == player_id:
-                print(f"line 61, winner = {player_id}")
                 return player_id
             # checking diagonals
             if cells[0].owner == cells[4].owner == cells[8].owner == player_id or \
@@ -69,8 +67,6 @@ class Board:
 
             return ""  # empty string = no winner
 
-        print(f"line 79 {check_for_winner('X') = }")
-        print(f"line 80 {check_for_winner('O') = }")
         winner = check_for_winner("X")
         if winner:
             return winner
@@ -98,7 +94,8 @@ class Game:
             print()
             self.print_board()
             try:
-                player_move = int(input(f"It's {player.name}'s turn! Enter number of cell "))
+                player_move = int(
+                    input(f"It's {player.name}'s turn! Enter number of cell "))
                 if player_move < 1 or player_move > 9:
                     print("Invalid move!")
                     continue
@@ -123,7 +120,8 @@ class Game:
             # safely getting a move from a player
             player_move = self.make_a_move(player)
 
-            self.state.change_cell_by_number(player, self.state.cells[player_move - 1].number)  # making a move
+            self.state.change_cell_by_number(
+                player, self.state.cells[player_move - 1].number)  # making a move
 
             # checking if there is a winner and if so closing session
             winner = self.state.check_winner()
@@ -135,8 +133,10 @@ class Game:
             if winner == "D":
                 print("It's draw! Nice play!")
                 if _multiple:
-                    print(f"{self.players[0].name} won {self.players[0].amount_of_wins} times")
-                    print(f"{self.players[1].name} won {self.players[1].amount_of_wins} times")
+                    print(
+                        f"{self.players[0].name} won {self.players[0].amount_of_wins} times")
+                    print(
+                        f"{self.players[1].name} won {self.players[1].amount_of_wins} times")
                     self.state = Board()
                 break
             elif winner:  # if not draw and there is a winner
@@ -144,8 +144,10 @@ class Game:
                 print(f"{winner.name} is the winner! Congrats!")
                 winner.amount_of_wins += 1
                 if _multiple:
-                    print(f"{self.players[0].name} won {self.players[0].amount_of_wins} times")
-                    print(f"{self.players[1].name} won {self.players[1].amount_of_wins} times")
+                    print(
+                        f"{self.players[0].name} won {self.players[0].amount_of_wins} times")
+                    print(
+                        f"{self.players[1].name} won {self.players[1].amount_of_wins} times")
                     self.state = Board()
                 if winner != self.players[0]:
                     self.players = self.players[::-1]
